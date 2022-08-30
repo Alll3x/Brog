@@ -24,6 +24,8 @@
         require("./config/auth")(passport);
     //helper
         const {eUser}= require("./helpers/eUser");   
+    //database config
+        const db = require("./config/db");
 
 //configurações 
     //Sessão
@@ -58,11 +60,12 @@
         app.use(express.json());
     //Mongoose
         mongoose.Promise = global.Promise;
-       mongoose.connect('mongodb://localhost/blogapp').then(()=>{
+       mongoose.connect(db.mongoURI).then(()=>{
         console.log("DataBase On-line");
        }).catch((err)=>{
         console.log("Erro ao se conectar" + err);
        })
+    
     //Public
         app.use(express.static(path.join(__dirname,'public')));
 
@@ -130,7 +133,8 @@
     app.use("/usuarios", usuarios);
 //outros
     //setando a porta
-    const PORT = 8081;
+    // const PORT = 8081;
+    const PORT = process.env.PORT 
     app.listen(PORT, ()=>{
         try {
             console.log("Server On-line");
