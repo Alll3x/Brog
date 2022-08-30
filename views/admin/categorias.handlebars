@@ -1,0 +1,25 @@
+{{#each erros}}
+    <div class="alert alert-danger">{{texto}}</div>
+{{else}}
+
+{{/each}}
+<h2>Lista de categorias</h2>
+<a href="/admin/categorias/add"><button class="btn btn-success">Nova categoria</button></a>
+<hr>
+{{#each categorias}}
+    <div class="card mt-2">
+        <div class="card-body">
+            <h4>{{nome}}</h4>
+            <small>Slug: {{slug}}</small><br>
+            <small>Data de criação: {{date}}</small>
+        <br>
+                <a href="/admin/categorias/edit/{{_id}}"><button class="btn btn-info">Editar</button><a></a> 
+                <form action="/admin/categorias/deletar" method="post">
+                    <input type="hidden" name="id" value="{{_id}}">
+                    <button type="submit" class="btn btn-danger">Deletar</button>
+                </form>
+        </div>
+    </div>
+{{else}}
+    <h4>Nenhuma categoria cadastrada</h4>
+{{/each}}
