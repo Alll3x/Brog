@@ -85,7 +85,7 @@
             res.send("Erro 404");
        }), 
 
-        app.get("/postagem/:slug",eUser, (req, res)=>{
+        app.get("/categorias/postagem/:slug", eUser, (req, res)=>{
         Postagem.findOne({slug: req.params.slug}).then((postagem)=>{
             if(postagem){
                 res.render("postagem/index", {postagem: postagem});
@@ -133,8 +133,7 @@
     app.use("/usuarios", usuarios);
 //outros
     //setando a porta
-    // const PORT = 8081;
-    const PORT = process.env.PORT 
+    const PORT = process.env.PORT || 8081;
     app.listen(PORT, ()=>{
         try {
             console.log("Server On-line");
